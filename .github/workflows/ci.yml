@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: .NET
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.4'
+      - name: Install dependencies
+        run: cd src && dotnet restore
+      - name: Build
+        run: cd src && dotnet build --configuration Release --no-restore        
+      - name: Unit Test With Coverage Report
+        run: |
+          printenv
+          cd ./tests/ChaosComposers.UnitTests/
+          dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+      - name: Publish Coverage Report
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./tests/ChaosComposers.UnitTests/TestResults/coverage.info
