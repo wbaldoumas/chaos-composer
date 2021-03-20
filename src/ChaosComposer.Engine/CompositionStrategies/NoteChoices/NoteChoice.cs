@@ -56,8 +56,7 @@ namespace ChaosComposer.Engine.CompositionStrategies.NoteChoices
                 return true;
             }
 
-            return !(VoiceNoteChoices is null || other.VoiceNoteChoices is null) &&
-                   VoiceNoteChoices.SetEquals(other.VoiceNoteChoices);
+            return VoiceNoteChoices.SetEquals(other.VoiceNoteChoices);
         }
 
         public override bool Equals(object obj)
