@@ -28,4 +28,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./tests/ChaosComposer.UnitTests/TestResults/coverage.info
-          verbose: true

@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="MockClass.cs~RFc4b9c1.TMP" />
+  </ItemGroup>
+
 </Project>
