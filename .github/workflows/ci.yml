@@ -22,4 +22,9 @@ jobs:
         run: |
           printenv
           cd ./tests/ChaosComposer.UnitTests/
-          dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+          dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov /p:IncludeTestAssembly=true
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./tests/ChaosComposer.UnitTests/TestResults/coverage.info
