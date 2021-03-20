@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaosComposer.Engine", "ChaosComposer.Engine\ChaosComposer.Engine.csproj", "{8F7A40BC-E494-43BB-94A6-75E668754FE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaosComposer.UnitTests", "..\tests\ChaosComposer.UnitTests\ChaosComposer.UnitTests.csproj", "{3DB957F9-6CD6-47AF-A1AE-7A110953C893}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F7A40BC-E494-43BB-94A6-75E668754FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7A40BC-E494-43BB-94A6-75E668754FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7A40BC-E494-43BB-94A6-75E668754FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7A40BC-E494-43BB-94A6-75E668754FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB957F9-6CD6-47AF-A1AE-7A110953C893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB957F9-6CD6-47AF-A1AE-7A110953C893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB957F9-6CD6-47AF-A1AE-7A110953C893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB957F9-6CD6-47AF-A1AE-7A110953C893}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {605E109E-B1D4-4B6E-A1A1-0704DC782262}
+	EndGlobalSection
+EndGlobal
