@@ -21,7 +21,7 @@ jobs:
       - name: Unit Test With Coverage Report
         run: |
           printenv
-          cd ./tests/ChaosComposers.UnitTests/
+          cd ./tests/ChaosComposer.UnitTests/
           dotnet test --no-restore /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
       - name: Publish Coverage Report
         uses: coverallsapp/github-action@master
