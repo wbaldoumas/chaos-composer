@@ -30,10 +30,12 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
         [Test]
         public void GetNoteChoiceIndices_Throws_Exception_When_Uninitialized()
         {
+            // arrange
             var noteChoiceGenerator = new NoteChoiceGenerator(_mockVoiceNoteChoiceRepository);
 
             var act = new Func<IDictionary<INoteChoice, int>>(() => noteChoiceGenerator.GetNoteChoiceIndices());
 
+            // act + assert
             act.Should()
                 .Throw<InvalidOperationException>()
                 .WithMessage("Note choices must be generated before attempting to retrieve their indices!");
@@ -45,23 +47,32 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
             ISet<Voice> chosenVoices,
             int expectedNoteChoiceCount)
         {
+            // arrange
             var noteChoiceGenerator = new NoteChoiceGenerator(_mockVoiceNoteChoiceRepository);
 
+            // act
             var noteChoices = noteChoiceGenerator.GetNoteChoices(chosenVoices);
+            var otherNoteChoices = noteChoiceGenerator.GetNoteChoices(chosenVoices);
 
+            // assert
+            _mockVoiceNoteChoiceRepository.ReceivedWithAnyArgs(chosenVoices.Count).GetVoiceNoteChoices(default);
             noteChoices.Should().OnlyHaveUniqueItems();
             noteChoices.Should().HaveCount(expectedNoteChoiceCount);
+            otherNoteChoices.Should().BeSubsetOf(noteChoices);
         }
 
         [Test]
         public void NoteChoiceGenerator_Generates_Valid_Note_Choice_Indices()
         {
+            // arrange
             var chosenVoices = new HashSet<Voice> { Voice.Melody, Voice.Harmony, Voice.Bass };
             var noteChoiceGenerator = new NoteChoiceGenerator(_mockVoiceNoteChoiceRepository);
 
+            // act
             var noteChoices = noteChoiceGenerator.GetNoteChoices(chosenVoices);
             var noteChoiceIndices = noteChoiceGenerator.GetNoteChoiceIndices();
 
+            // assert
             noteChoiceIndices.Values.Should().OnlyHaveUniqueItems();
 
             foreach (var noteChoice in noteChoices)

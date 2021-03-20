@@ -76,5 +76,48 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
             areNotEqualOperator.Should().BeTrue();
             areHashCodesEqual.Should().BeFalse();
         }
+
+        [Test]
+        public void When_other_NoteChoice_is_null_they_are_not_equal()
+        {
+            // arrange
+            var noteChoice = new NoteChoice(new HashSet<VoiceNoteChoice>());
+
+            // act
+            var areEqual = noteChoice.Equals(null);
+
+            // assert
+            areEqual.Should().BeFalse();
+        }
+
+        [Test]
+        public void When_other_NoteChoice_is_same_reference_they_are_equal()
+        {
+            // arrange
+            var noteChoice = new NoteChoice(new HashSet<VoiceNoteChoice>());
+            var noteChoiceB = noteChoice;
+
+            // act
+            var areEqual = noteChoice.Equals(noteChoiceB);
+
+            // assert
+            areEqual.Should().BeTrue();
+        }
+
+        [Test]
+        public void When_other_VoiceNoteChoices_are_same_reference_they_are_equal()
+        {
+            // arrange
+            var voiceNoteChoices = new HashSet<VoiceNoteChoice>();
+
+            var noteChoice = new NoteChoice(voiceNoteChoices);
+            var noteChoiceB = new NoteChoice(voiceNoteChoices);
+
+            // act
+            var areEqual = noteChoice.Equals(noteChoiceB);
+
+            // assert
+            areEqual.Should().BeTrue();
+        }
     }
 }
