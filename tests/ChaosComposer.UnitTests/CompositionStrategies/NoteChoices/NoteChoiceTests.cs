@@ -10,6 +10,25 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
     public class NoteChoiceTests
     {
         [Test]
+        public void GetVoiceNoteChoice_returns_expected_VoiceNoteChoice()
+        {
+            // arrange
+            var voiceNoteChoices = new HashSet<VoiceNoteChoice>
+            {
+                new(Voice.Bass, NoteMotion.Oblique, 1),
+                new(Voice.Harmony, NoteMotion.Descending, 12),
+                new(Voice.Melody, NoteMotion.Ascending, 123)
+            };
+
+            var noteChoice = new NoteChoice(voiceNoteChoices);
+
+            // act
+            var voiceNoteChoice = noteChoice.GetVoiceNoteChoice(Voice.Melody);
+
+            // assert
+            voiceNoteChoice.Should().Be(new VoiceNoteChoice(Voice.Melody, NoteMotion.Ascending, 123));
+        }
+        [Test]
         public void When_note_choices_have_same_voice_note_choices_they_are_equal()
         {
             // arrange
@@ -134,6 +153,27 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
 
             var noteChoice = new NoteChoice(voiceNoteChoices);
             var noteChoiceB = new { SomeField = 1 };
+
+            // act
+            var areEqual = noteChoice.Equals(noteChoiceB);
+
+            // assert
+            areEqual.Should().BeFalse();
+        }
+
+        [Test]
+        public void When_other_VoiceNoteChoices_are_null_they_are_not_equal()
+        {
+            // arrange
+            var voiceNoteChoices = new HashSet<VoiceNoteChoice>
+            {
+                new(Voice.Bass, NoteMotion.Oblique, 2),
+                new(Voice.Harmony, NoteMotion.Descending, 13),
+                new(Voice.Melody, NoteMotion.Ascending, 124)
+            };
+
+            var noteChoice = new NoteChoice(voiceNoteChoices);
+            var noteChoiceB = new NoteChoice(null);
 
             // act
             var areEqual = noteChoice.Equals(noteChoiceB);
