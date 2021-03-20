@@ -85,9 +85,11 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
 
             // act
             var areEqual = noteChoice.Equals(null);
+            var areObjectEqual = noteChoice.Equals((object) null);
 
             // assert
             areEqual.Should().BeFalse();
+            areObjectEqual.Should().BeFalse();
         }
 
         [Test]
@@ -99,9 +101,11 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
 
             // act
             var areEqual = noteChoice.Equals(noteChoiceB);
+            var areObjectEqual = noteChoice.Equals((object) noteChoiceB);
 
             // assert
             areEqual.Should().BeTrue();
+            areObjectEqual.Should().BeTrue();
         }
 
         [Test]
@@ -115,9 +119,27 @@ namespace ChaosComposer.UnitTests.CompositionStrategies.NoteChoices
 
             // act
             var areEqual = noteChoice.Equals(noteChoiceB);
+            var areObjectEqual = noteChoice.Equals((object) noteChoiceB);
 
             // assert
             areEqual.Should().BeTrue();
+            areObjectEqual.Should().BeTrue();
+        }
+
+        [Test]
+        public void When_other_NoteChoice_is_not_a_NoteChoice_they_are_not_equal()
+        {
+            // arrange
+            var voiceNoteChoices = new HashSet<VoiceNoteChoice>();
+
+            var noteChoice = new NoteChoice(voiceNoteChoices);
+            var noteChoiceB = new { SomeField = 1 };
+
+            // act
+            var areEqual = noteChoice.Equals(noteChoiceB);
+
+            // assert
+            areEqual.Should().BeFalse();
         }
     }
 }
